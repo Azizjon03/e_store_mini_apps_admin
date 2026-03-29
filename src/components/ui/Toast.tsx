@@ -42,7 +42,7 @@ export function ToastContainer() {
               toast.type === 'success' ? 'var(--mgr-success)'
               : toast.type === 'error' ? 'var(--mgr-danger)'
               : 'var(--tg-theme-button-color)',
-            color: '#fff',
+            color: 'var(--tg-theme-button-text-color)',
           }}
         >
           {toast.message}

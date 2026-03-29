@@ -18,7 +18,7 @@ export default function Categories() {
 
   return (
     <div>
-      <div className="flex items-center justify-between px-4 pt-4 pb-3">
+      <div className="flex items-center justify-between px-4 pt-3 pb-3">
         <h1 className="text-lg font-bold" style={{ color: 'var(--tg-theme-text-color)' }}>Kategoriyalar</h1>
         <button
           className="px-3 py-1.5 rounded-lg text-sm font-medium"
@@ -32,7 +32,7 @@ export default function Categories() {
       {isLoading ? (
         <div className="flex items-center justify-center min-h-[40vh]"><Spinner size={32} /></div>
       ) : !categories?.length ? (
-        <EmptyState icon="📁" title="Kategoriyalar topilmadi" />
+        <EmptyState title="Kategoriyalar topilmadi" />
       ) : (
         <div className="px-4 pb-4">
           {categories.map((cat) => (
@@ -52,7 +52,11 @@ function CategoryTreeItem({ category, level, onEdit }: { category: Category; lev
         style={{ paddingLeft: level * 20 + 8 }}
         onClick={() => onEdit(category.id)}
       >
-        <span className="text-base">{category.icon || '📁'}</span>
+        <span className="text-base">{category.icon || (
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+            <path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z" stroke="var(--tg-theme-hint-color)" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+        )}</span>
         <div className="flex-1">
           <span className="text-sm font-medium" style={{ color: 'var(--tg-theme-text-color)' }}>
             {category.name?.uz || category.slug}
@@ -63,10 +67,10 @@ function CategoryTreeItem({ category, level, onEdit }: { category: Category; lev
             </span>
           )}
         </div>
-        <span className="text-xs px-2 py-0.5 rounded-full"
+        <span className="text-xs px-2 py-0.5 rounded-full font-medium"
           style={{
-            backgroundColor: category.status === 'active' ? 'rgba(52,199,89,0.15)' : 'rgba(255,59,48,0.15)',
-            color: category.status === 'active' ? '#34c759' : '#ff3b30',
+            backgroundColor: category.status === 'active' ? 'var(--mgr-success-light)' : 'var(--mgr-danger-light)',
+            color: category.status === 'active' ? 'var(--mgr-success)' : 'var(--mgr-danger)',
           }}>
           {category.status === 'active' ? 'Faol' : 'Nofaol'}
         </span>

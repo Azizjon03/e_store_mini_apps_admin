@@ -1,3 +1,4 @@
+import type { ReactNode } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
 import { dashboardApi } from '@/api/dashboard';
@@ -33,7 +34,7 @@ export default function Dashboard() {
 
   if (isError) {
     return (
-      <div className="p-4">
+      <div className="px-4 pt-3">
         <h1 className="text-lg font-bold mb-2" style={{ color: 'var(--tg-theme-text-color)' }}>
           E-Store Manager
         </h1>
@@ -45,8 +46,8 @@ export default function Dashboard() {
   }
 
   return (
-    <div className="p-4">
-      <h1 className="text-lg font-bold mb-1" style={{ color: 'var(--tg-theme-text-color)' }}>
+    <div className="px-4 pt-3 pb-4">
+      <h1 className="text-lg font-bold mb-0.5" style={{ color: 'var(--tg-theme-text-color)' }}>
         Salom, {user?.first_name || 'Manager'}!
       </h1>
       <p className="text-sm mb-4" style={{ color: 'var(--tg-theme-hint-color)' }}>
@@ -54,28 +55,32 @@ export default function Dashboard() {
       </p>
 
       {/* Stats Cards */}
-      <div className="grid grid-cols-2 gap-3 mb-6">
+      <div className="grid grid-cols-2 gap-2.5 mb-4">
         <StatCard
           label="Bugungi buyurtmalar"
           value={String(dashboard?.today_orders ?? 0)}
-          icon="📦"
+          icon={<OrdersStatIcon />}
+          bgToken="--mgr-accent-light"
           onClick={() => navigate('/orders')}
         />
         <StatCard
           label="Kutilmoqda"
           value={String(dashboard?.pending_orders ?? 0)}
-          icon="⏳"
+          icon={<PendingStatIcon />}
+          bgToken="--mgr-warning-light"
           onClick={() => navigate('/orders?status=pending')}
         />
         <StatCard
           label="Bugungi daromad"
           value={formatPrice(dashboard?.today_revenue ?? 0)}
-          icon="💰"
+          icon={<RevenueStatIcon />}
+          bgToken="--mgr-success-light"
         />
         <StatCard
           label="Kam qolgan"
           value={`${dashboard?.low_stock_count ?? 0} ta`}
-          icon="📉"
+          icon={<LowStockStatIcon />}
+          bgToken="--mgr-danger-light"
           onClick={() => navigate('/stock?filter=low')}
         />
       </div>
@@ -99,11 +104,11 @@ export default function Dashboard() {
             {recentOrders.data.map((order) => (
               <button
                 key={order.id}
-                className="w-full text-left rounded-xl p-3"
+                className="w-full text-left rounded-xl p-3.5"
                 style={{ backgroundColor: 'var(--tg-theme-secondary-bg-color)' }}
                 onClick={() => navigate(`/orders/${order.id}`)}
               >
-                <div className="flex items-center justify-between mb-1">
+                <div className="flex items-center justify-between mb-1.5">
                   <span className="text-sm font-medium" style={{ color: 'var(--tg-theme-text-color)' }}>
                     #{order.order_number}
                   </span>
@@ -126,20 +131,56 @@ export default function Dashboard() {
   );
 }
 
-function StatCard({ label, value, icon, onClick }: { label: string; value: string; icon: string; onClick?: () => void }) {
+function StatCard({ label, value, icon, bgToken, onClick }: { label: string; value: string; icon: ReactNode; bgToken: string; onClick?: () => void }) {
   return (
     <button
-      className="rounded-xl p-3 text-left"
+      className="rounded-xl p-3.5 text-left"
       style={{ backgroundColor: 'var(--tg-theme-secondary-bg-color)' }}
       onClick={onClick}
     >
-      <div className="flex items-center gap-2 mb-1">
-        <span className="text-lg">{icon}</span>
-        <span className="text-xs" style={{ color: 'var(--tg-theme-hint-color)' }}>{label}</span>
+      <div className="flex items-center gap-2 mb-2">
+        <div className="w-8 h-8 rounded-lg flex items-center justify-center" style={{ backgroundColor: `var(${bgToken})` }}>
+          {icon}
+        </div>
       </div>
+      <span className="text-xs block mb-0.5" style={{ color: 'var(--tg-theme-hint-color)' }}>{label}</span>
       <span className="text-base font-bold" style={{ color: 'var(--tg-theme-text-color)' }}>
         {value}
       </span>
     </button>
+  );
+}
+
+function OrdersStatIcon() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+      <path d="M20 7H4a1 1 0 00-1 1v11a2 2 0 002 2h14a2 2 0 002-2V8a1 1 0 00-1-1z" stroke="var(--mgr-accent)" strokeWidth="2" />
+      <path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2" stroke="var(--mgr-accent)" strokeWidth="2" />
+    </svg>
+  );
+}
+
+function PendingStatIcon() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="9" stroke="var(--mgr-warning)" strokeWidth="2" />
+      <path d="M12 7v5l3 3" stroke="var(--mgr-warning)" strokeWidth="2" strokeLinecap="round" />
+    </svg>
+  );
+}
+
+function RevenueStatIcon() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+      <path d="M12 2v20M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6" stroke="var(--mgr-success)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
+function LowStockStatIcon() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+      <path d="M22 12h-4l-3 9L9 3l-3 9H2" stroke="var(--mgr-danger)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
   );
 }

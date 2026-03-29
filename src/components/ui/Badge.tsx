@@ -7,10 +7,10 @@ export function Badge({ count }: BadgeProps) {
 
   return (
     <span
-      className="absolute -top-1 -right-2 min-w-[18px] h-[18px] flex items-center justify-center rounded-full text-[10px] font-bold px-1 badge-bounce"
+      className="absolute -top-1 -right-2 min-w-4.5 h-4.5 flex items-center justify-center rounded-full text-[10px] font-bold px-1 badge-bounce"
       style={{
         backgroundColor: 'var(--mgr-danger)',
-        color: '#fff',
+        color: 'var(--tg-theme-button-text-color)',
       }}
     >
       {count > 99 ? '99+' : count}

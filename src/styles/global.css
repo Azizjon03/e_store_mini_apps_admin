@@ -18,6 +18,11 @@
   --mgr-warning: #e8a427;
   --mgr-danger: #e53e3e;
   --mgr-skeleton: var(--tg-theme-secondary-bg-color);
+
+  --mgr-accent-light: rgba(36, 129, 204, 0.1);
+  --mgr-success-light: rgba(49, 181, 69, 0.1);
+  --mgr-warning-light: rgba(232, 164, 39, 0.1);
+  --mgr-danger-light: rgba(229, 62, 62, 0.1);
 }
 
 * {

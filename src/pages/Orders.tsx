@@ -60,13 +60,13 @@ export default function Orders() {
           <Spinner size={28} />
         </div>
       ) : !data || data.data.length === 0 ? (
-        <EmptyState icon="📋" title="Buyurtmalar yo'q" description="Hozircha bu statusdagi buyurtmalar yo'q" />
+        <EmptyState title="Buyurtmalar yo'q" description="Hozircha bu statusdagi buyurtmalar yo'q" />
       ) : (
         <div className="flex flex-col gap-2 px-4 pb-4">
           {data.data.map((order) => (
             <button
               key={order.id}
-              className="w-full text-left rounded-xl p-3"
+              className="w-full text-left rounded-xl p-3.5"
               style={{ backgroundColor: 'var(--tg-theme-secondary-bg-color)' }}
               onClick={() => navigate(`/orders/${order.id}`)}
             >

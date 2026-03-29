@@ -95,7 +95,7 @@ export default function OrderDetail() {
   }
 
   return (
-    <div className="p-4">
+    <div className="px-4 pt-3 pb-4">
       {/* Header */}
       <div className="flex items-center justify-between mb-4">
         <h1 className="text-lg font-bold" style={{ color: 'var(--tg-theme-text-color)' }}>
@@ -177,7 +177,7 @@ export default function OrderDetail() {
           <div className="flex gap-2">
             <button
               className="flex-1 px-3 py-2.5 rounded-lg text-sm font-medium"
-              style={{ backgroundColor: 'var(--mgr-success)', color: '#fff' }}
+              style={{ backgroundColor: 'var(--mgr-success)', color: 'var(--tg-theme-button-text-color)' }}
               onClick={() => paymentMutation.mutate('verify')}
               disabled={paymentMutation.isPending}
             >
@@ -185,7 +185,7 @@ export default function OrderDetail() {
             </button>
             <button
               className="flex-1 px-3 py-2.5 rounded-lg text-sm font-medium"
-              style={{ backgroundColor: 'var(--mgr-danger)', color: '#fff' }}
+              style={{ backgroundColor: 'var(--mgr-danger)', color: 'var(--tg-theme-button-text-color)' }}
               onClick={() => paymentMutation.mutate('reject')}
               disabled={paymentMutation.isPending}
             >
@@ -197,7 +197,7 @@ export default function OrderDetail() {
         {order.can_cancel && (
           <button
             className="w-full px-3 py-2.5 rounded-lg text-sm font-medium"
-            style={{ backgroundColor: 'var(--mgr-danger)', color: '#fff' }}
+            style={{ backgroundColor: 'var(--mgr-danger)', color: 'var(--tg-theme-button-text-color)' }}
             onClick={() => setCancelSheet(true)}
           >
             Bekor qilish
@@ -236,7 +236,7 @@ export default function OrderDetail() {
         />
         <button
           className="w-full mt-3 px-3 py-2.5 rounded-lg text-sm font-medium"
-          style={{ backgroundColor: 'var(--mgr-danger)', color: '#fff' }}
+          style={{ backgroundColor: 'var(--mgr-danger)', color: 'var(--tg-theme-button-text-color)' }}
           onClick={() => reason.trim() && cancelMutation.mutate(reason.trim())}
           disabled={!reason.trim() || cancelMutation.isPending}
         >
@@ -261,7 +261,7 @@ export default function OrderDetail() {
         />
         <button
           className="w-full mt-3 px-3 py-2.5 rounded-lg text-sm font-medium"
-          style={{ backgroundColor: 'var(--mgr-warning)', color: '#fff' }}
+          style={{ backgroundColor: 'var(--mgr-warning)', color: 'var(--tg-theme-button-text-color)' }}
           onClick={() => reason.trim() && returnMutation.mutate(reason.trim())}
           disabled={!reason.trim() || returnMutation.isPending}
         >

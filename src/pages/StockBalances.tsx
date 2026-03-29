@@ -35,7 +35,7 @@ export default function StockBalances() {
           className="px-3 py-1.5 rounded-full text-xs font-medium"
           style={{
             backgroundColor: showLow ? 'var(--mgr-danger)' : 'var(--tg-theme-secondary-bg-color)',
-            color: showLow ? '#fff' : 'var(--tg-theme-hint-color)',
+            color: showLow ? 'var(--tg-theme-button-text-color)' : 'var(--tg-theme-hint-color)',
           }}
           onClick={() => { haptic.selectionChanged(); setShowLow(true); }}
         >
@@ -47,7 +47,6 @@ export default function StockBalances() {
         <div className="flex items-center justify-center py-12"><Spinner size={28} /></div>
       ) : !data || data.data.length === 0 ? (
         <EmptyState
-          icon={showLow ? '✅' : '📦'}
           title={showLow ? 'Kam qolgan mahsulotlar yo\'q' : 'Omborda mahsulot yo\'q'}
         />
       ) : (
@@ -75,14 +74,14 @@ export default function StockBalances() {
                 <div className="flex gap-1">
                   <button
                     className="px-2 py-1 rounded text-xs font-medium"
-                    style={{ backgroundColor: 'var(--mgr-success)', color: '#fff' }}
+                    style={{ backgroundColor: 'var(--mgr-success)', color: 'var(--tg-theme-button-text-color)' }}
                     onClick={() => navigate(`/stock/${balance.id}/adjust?direction=in`)}
                   >
                     +Kirim
                   </button>
                   <button
                     className="px-2 py-1 rounded text-xs font-medium"
-                    style={{ backgroundColor: 'var(--mgr-danger)', color: '#fff' }}
+                    style={{ backgroundColor: 'var(--mgr-danger)', color: 'var(--tg-theme-button-text-color)' }}
                     onClick={() => navigate(`/stock/${balance.id}/adjust?direction=out`)}
                   >
                     -Chiqim

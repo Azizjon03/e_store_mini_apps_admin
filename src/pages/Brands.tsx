@@ -17,7 +17,7 @@ export default function Brands() {
 
   return (
     <div>
-      <div className="flex items-center justify-between px-4 pt-4 pb-3">
+      <div className="flex items-center justify-between px-4 pt-3 pb-3">
         <h1 className="text-lg font-bold" style={{ color: 'var(--tg-theme-text-color)' }}>Brendlar</h1>
         <button
           className="px-3 py-1.5 rounded-lg text-sm font-medium"
@@ -31,7 +31,7 @@ export default function Brands() {
       {isLoading ? (
         <div className="flex items-center justify-center min-h-[40vh]"><Spinner size={32} /></div>
       ) : !data?.data?.length ? (
-        <EmptyState icon="🏷️" title="Brendlar topilmadi" />
+        <EmptyState title="Brendlar topilmadi" />
       ) : (
         <div className="flex flex-col gap-2 px-4 pb-4">
           {data.data.map((brand) => (
@@ -45,7 +45,10 @@ export default function Brands() {
                 <img src={brand.logo} alt="" className="w-10 h-10 rounded-lg object-cover" />
               ) : (
                 <div className="w-10 h-10 rounded-lg flex items-center justify-center" style={{ backgroundColor: 'var(--tg-theme-bg-color)' }}>
-                  <span className="text-lg">🏷️</span>
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                    <path d="M20.59 13.41l-7.17 7.17a2 2 0 01-2.83 0L2 12V2h10l8.59 8.59a2 2 0 010 2.82z" stroke="var(--tg-theme-hint-color)" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+                    <circle cx="7" cy="7" r="1" fill="var(--tg-theme-hint-color)" />
+                  </svg>
                 </div>
               )}
               <div className="flex-1">
@@ -54,10 +57,10 @@ export default function Brands() {
                   <p className="text-xs" style={{ color: 'var(--tg-theme-hint-color)' }}>{brand.products_count} mahsulot</p>
                 )}
               </div>
-              <span className="text-xs px-2 py-0.5 rounded-full"
+              <span className="text-xs px-2 py-0.5 rounded-full font-medium"
                 style={{
-                  backgroundColor: brand.status === 'active' ? 'rgba(52,199,89,0.15)' : 'rgba(255,59,48,0.15)',
-                  color: brand.status === 'active' ? '#34c759' : '#ff3b30',
+                  backgroundColor: brand.status === 'active' ? 'var(--mgr-success-light)' : 'var(--mgr-danger-light)',
+                  color: brand.status === 'active' ? 'var(--mgr-success)' : 'var(--mgr-danger)',
                 }}>
                 {brand.status === 'active' ? 'Faol' : 'Nofaol'}
               </span>
