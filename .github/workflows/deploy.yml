@@ -1,4 +1,3 @@
-
 name: Deploy Manager App
 
 on:
@@ -21,4 +20,3 @@ jobs:
             npm install
             npm run build
             echo "Manager app deployed!"
-EOF
